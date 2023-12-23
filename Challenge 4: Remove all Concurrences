@@ -1,0 +1,83 @@
+import 'dart:io';
+
+class Node {
+dynamic data;
+Node? next;
+
+Node(this.data);
+}
+
+class LinkedList {
+Node? head;
+
+void addNode(dynamic data) {
+Node newNode = Node(data);
+newNode.next = head;
+head = newNode;
+}
+
+void removeOccurrences(dynamic target) {
+while (head != null && head!.data == target) {
+head = head!.next;
+}
+
+
+Node? current = head;
+Node? prev = null;
+
+while (current != null) {
+  if (current.data == target) {
+    if (prev != null) {
+      prev.next = current.next;
+    }
+  } else {
+    prev = current;
+  }
+
+  current = current.next;
+}
+
+
+
+}
+
+void printList() {
+Node? temp = head;
+while (temp != null) {
+stdout.write("${temp.data} -> ");
+temp = temp.next;
+}
+print("null");
+}
+}
+
+void removeAndPrintList() {
+LinkedList linkedList = LinkedList();
+
+stdout.write("Enter the number of nodes: ");
+int numNodes = int.parse(stdin.readLineSync()!);
+
+for (int i = 1; i <= numNodes; i++) {
+stdout.write("Enter data for node $i: ");
+dynamic data = stdin.readLineSync();
+linkedList.addNode(data);
+}
+
+// Printing original list
+print("\nOriginal List:");
+linkedList.printList();
+
+stdout.write("\nEnter the element to remove: ");
+dynamic elementToRemove = stdin.readLineSync();
+
+// Removing occurrences of the specified element
+linkedList.removeOccurrences(elementToRemove);
+
+// Printing modified list
+print("\nList after removing occurrences of $elementToRemove:");
+linkedList.printList();
+}
+
+void main() {
+removeAndPrintList();
+}
