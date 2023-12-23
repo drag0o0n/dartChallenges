@@ -1,0 +1,39 @@
+//Ahmad Barhoum
+//this program checks the input from users if the parentheses are balances
+import 'dart:io';
+bool areParenthesesBalanced(String input) {
+int count = 0;
+
+for (int i = 0; i < input.length; i++) {
+if (input[i] == '(') {
+count++;
+} else if (input[i] == ')') {
+count--;
+}
+if (count < 0) {
+return false;
+}
+}
+return count == 0;
+}
+
+void checkBalancedParentheses() {
+print("plese enter a sentence with parentheses to check balancing: ");
+String input = stdin.readLineSync()!.trim();
+if (input.toLowerCase() == 'exit') {
+print("BYE !!:(");
+exit(0);
+}
+
+if (areParenthesesBalanced(input)) {
+print("The parentheses are balanced.");
+} else {
+print("The parentheses are not balanced.");
+}
+}
+
+void main() {
+while(true){
+
+checkBalancedParentheses();}
+}
