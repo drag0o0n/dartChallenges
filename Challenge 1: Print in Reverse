@@ -1,0 +1,72 @@
+import 'dart:io';
+
+class Node {
+dynamic data;
+Node? next;
+
+Node(this.data);
+}
+
+class LinkedList {
+Node? head;
+
+void addNode(dynamic data) {
+Node newNode = Node(data);
+newNode.next = head;
+head = newNode;
+}
+
+void reverseList() {
+Node? current = head;
+Node? prev = null;
+Node? nextNode;
+
+
+while (current != null) {
+  nextNode = current.next;
+  current.next = prev;
+  prev = current;
+  current = nextNode;
+}
+
+head = prev;
+
+
+
+}
+
+void printList() {
+Node? temp = head;
+while (temp != null) {
+stdout.write("${temp.data} -> ");
+temp = temp.next;
+}
+print("null");
+}
+}
+
+void createAndReverseLinkedList() {
+LinkedList linkedList = LinkedList();
+
+stdout.write("Enter the number of nodes: ");
+int numNodes = int.parse(stdin.readLineSync()!);
+
+for (int i = 1; i <= numNodes; i++) {
+stdout.write("Enter data for node $i: ");
+dynamic data = stdin.readLineSync();
+linkedList.addNode(data);
+}
+
+print("\nOriginal List:");
+linkedList.printList();
+
+// Reverse the list
+linkedList.reverseList();
+
+print("\nReversed List:");
+linkedList.printList();
+}
+
+void main() {
+createAndReverseLinkedList();
+}
