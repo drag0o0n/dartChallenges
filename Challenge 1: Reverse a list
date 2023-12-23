@@ -1,0 +1,36 @@
+import 'dart:io';
+
+void reverseList(List<dynamic> inputList) {
+List<dynamic> reversedList = List.from(inputList.reversed);
+
+print("Original List: $inputList");
+print("Reversed List: $reversedList");
+}
+
+void input() {
+print("Please enter the elements of the original list, please separate them by comma (,)");
+print("Input example: 1,2,3");
+String input = stdin.readLineSync()!.trim();
+
+// Check if the user entered 'esc' to exit
+if (input.toLowerCase() == 'esc') {
+print("Exiting program.");
+exit(0);
+}
+
+List<dynamic> mylist;
+try {
+mylist = input.split(',').map((e) => int.parse(e.trim())).toList();
+} catch (e) {
+print("Error: Invalid input. Please enter valid comma-separated numeric values or 'esc' to exit.");
+return;
+}
+reverseList(mylist);
+}
+
+void main() {
+// Iterate until the user enters 'esc'
+while (true) {
+input();
+}
+}
